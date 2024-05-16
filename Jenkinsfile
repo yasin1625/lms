@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Sonar Analysis') {
             steps {
-                echo 'Building..'
+                echo 'CODE QUALITY CHECK'
+                sh 'cat /etc/os-release'
+                sh 'sudo docker container ls'
             }
         }
         stage('Test') {
