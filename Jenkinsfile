@@ -16,9 +16,15 @@ pipeline {
                 echo 'BUILD COMPLETED'
             }
         }
-        stage('Deploy') {
+        stage('Release LMS') {
             steps {
-                echo 'Deploying....'
+                script {
+                    echo "RELEASE LMS Artifacts"       
+                    def packageJSON = readJSON file: 'webapp/package.json'
+                    def packageJSONVersion = packageJSON.version
+                    sh "zip webapp/lms-${packageJSONVersion}.zip -r webapp/dist"
+                    sh "curl -v -u admin:lms12345 --upload-file webapp/lms-${packageJSONVersion}.zip http://54.190.152.188:8081/repository/lms/"     
+            }
             }
         }
     }
