@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Sonar Analysis') {
             steps {
-                echo 'Building..'
+                echo 'CODE QUALITY CHECK'
+                sleep 10
+                echo 'CODE QUALITY COMPLETED'
             }
         }
         stage('Test') {
