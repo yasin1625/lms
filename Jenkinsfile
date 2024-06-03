@@ -6,7 +6,8 @@ pipeline {
             steps {
                 echo 'CODE QUALITY CHECK'
                 // Below command works in jenkins 
-                sh 'cd webapp && sudo docker run --rm -e SONAR_HOST_URL="http://52.42.124.157:9000" -v ".:/usr/src" -e SONAR_TOKEN="sqa_2a18f0fe09e00f26989accf7b255a1623ae93601" sonarsource/sonar-scanner-cli -Dsonar.projectKey=lms'
+                // sh 'cd webapp && sudo docker run --rm -e SONAR_HOST_URL="http://52.42.124.157:9000" -v ".:/usr/src" -e SONAR_TOKEN="sqa_2a18f0fe09e00f26989accf7b255a1623ae93601" sonarsource/sonar-scanner-cli -Dsonar.projectKey=lms'
+                cleanWs()
                 echo 'CODE QUALITY COMPLETED'    
             }
         }
