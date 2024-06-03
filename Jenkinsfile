@@ -6,8 +6,7 @@ pipeline {
             steps {
                 echo 'CODE QUALITY CHECK'
                 // Below command works in jenkins 
-                // sh 'cd webapp && sudo docker run --rm -e SONAR_HOST_URL="http://52.42.124.157:9000" -v ".:/usr/src" -e SONAR_TOKEN="sqa_2a18f0fe09e00f26989accf7b255a1623ae93601" sonarsource/sonar-scanner-cli -Dsonar.projectKey=lms'
-                cleanWs()
+                sh 'cd webapp && sudo docker run --rm -e SONAR_HOST_URL="http://54.188.178.25:9000" -v ".:/usr/src" -e SONAR_TOKEN="sqa_2a18f0fe09e00f26989accf7b255a1623ae93601" sonarsource/sonar-scanner-cli -Dsonar.projectKey=lms'
                 echo 'CODE QUALITY COMPLETED'    
             }
         }
@@ -26,7 +25,6 @@ pipeline {
                     echo "${packageJSONVersion}"
                     sh "zip webapp/lms-${packageJSONVersion}.zip -r webapp/dist"
                     sh "curl -v -u admin:lms12345 --upload-file webapp/lms-${packageJSONVersion}.zip http://34.214.127.143:8081/repository/lms/"
-                    sh "rm -rf webapp/node_modules webapp/dist"
                 }
             }
         }
@@ -41,11 +39,17 @@ pipeline {
                     sh 'sudo rm -rf /var/www/html/*'
                     sh "sudo unzip -o lms-'${packageJSONVersion}'.zip"
                     sh "sudo cp -r webapp/dist/* /var/www/html"
-                    sh "rm -rf webapp/dist"
+                    cleanWs()
                 }
             }
         }
 
+        stage('Clean Up Workspace') {
+            steps {
+                    echo 'Cleaning Work Space'
+                    cleanWs()
+            }
+        }
     }
 }
 
