@@ -5,8 +5,11 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
                 echo 'CODE QUALITY CHECK'
-                sh 'cd webapp && sudo docker run  --rm -e SONAR_HOST_URL="http://52.42.124.157:9000" -e SONAR_LOGIN="sqp_31a2a065a5c706f2d31e4da19e61b346232ab619" -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=lms"  -v ".:/usr/src" sonarsource/sonar-scanner-cli'
+                script {
+                def app = "-Dsonar.projectKey=lms"
+                sh 'cd webapp && sudo docker run  --rm -e SONAR_HOST_URL="http://52.42.124.157:9000" -e SONAR_LOGIN="sqp_31a2a065a5c706f2d31e4da19e61b346232ab619" -e SONAR_SCANNER_OPTS=$app"  -v ".:/usr/src" sonarsource/sonar-scanner-cli'
                 echo 'CODE QUALITY COMPLETED'
+                }    
             }
         }
         stage('Build LMS') {
