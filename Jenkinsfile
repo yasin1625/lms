@@ -12,7 +12,7 @@ pipeline {
         stage('LMS Build Artifacts') {
             steps {
                 echo 'Preparing LMS Build'
-
+                sh 'cd webapp && npm install && npm run build'
                 echo 'Completed LMS Build'
             }
         }
