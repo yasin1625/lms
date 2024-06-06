@@ -18,9 +18,13 @@ pipeline {
         }
         stage('LMS Release Artifacts') {
             steps {
-                echo 'Preparing LMS Release'
-
-                echo 'Completed LMS Release'
+                script {
+                    echo 'Preparing LMS Release'
+                    def packageJson = readJSON file: 'package.json'
+                    def packageJSONVersion = packageJSON.version
+                    echo "${packageJSONVersion}"
+                    echo 'Completed LMS Release'
+                }
             }
         }
 
