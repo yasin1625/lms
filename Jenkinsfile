@@ -48,6 +48,7 @@ pipeline {
         stage('LMS Clean Up') {
             steps {
                 echo 'Cleaning Up'
+                cleanWs()
             }
         }
     }
