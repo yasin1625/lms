@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     echo 'Preparing LMS Release'
-                    def packageJson = readJSON file: 'package.json'
+                    def packageJson = readJSON file: 'webapp/package.json'
                     def packageJSONVersion = packageJSON.version
                     echo "${packageJSONVersion}"
                     echo 'Completed LMS Release'
