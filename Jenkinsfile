@@ -1,20 +1,35 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Code Quality') {
             steps {
                 echo 'Start Build'
             }
         }
-        stage('Test') {
+        
+        stage('Build LMS') {
             steps {
                 echo 'Start Testing'
             }
         }
-        stage('Deploy') {
+        
+        stage('Release LMS') {
             steps {
                 echo 'Start Deployment'
             }
         }
+
+        stage('Deploy LMS') {
+            steps {
+                echo 'Start Deployment'
+            }
+        }
+
+        stage('CleanUp LMS') {
+            steps {
+                echo 'Start Deployment'
+            }
+        }
+
     }
 }
