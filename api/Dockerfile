@@ -1,5 +1,5 @@
 # Docker file nodejs azure app services
-FROM node:latest
+FROM node:20
 # Create app directory
 WORKDIR /app
 # Install app dependencies
@@ -10,6 +10,6 @@ COPY . .
 RUN npx prisma generate
 RUN npm run build
 # Expose port
-EXPOSE 8080
+EXPOSE 3000
 # Start app
 CMD [ "npm", "start" ]
