@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'df -f'
+                sh 'df -h'
             }
         }
         stage('Deploy') {
