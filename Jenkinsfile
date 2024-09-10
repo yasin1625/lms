@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'free'
+                sh 'free -m'
             }
         }
     }
