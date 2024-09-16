@@ -8,16 +8,18 @@ pipeline {
                 echo 'CODE QUALITY COMPLETED' 
             }
         }
-        stage('Test') {
+        stage('Build LMS') {
             steps {
-                echo 'TESTING'
-                sh 'free -m'
+                echo 'Build LMS'
+                sh 'cd webapp && npm install && npm run build'
+                echo 'Build Completed'
             }
         }
-        stage('Deploy') {
+        
+        stage('Clean Up Workspace') {
             steps {
-                echo 'DEPLOYING'
-                sh 'df -h'
+                echo 'Cleaning Workspace'
+                cleanWs()
             }
         }
     }
