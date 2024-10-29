@@ -17,9 +17,12 @@ pipeline {
                     def packageJson = readJSON file: 'webapp/package.json'
                     def packageJSONVersion = packageJson.version
                     echo "${packageJSONVersion}"
+                    sh "zip webapp/lms-${packageJSONVersion}.zip -r webapp/dist"
+                    sh "curl -v -u admin:lms12345 --upload-file webapp/lms-${packageJSONVersion}.zip http://54.213.71.83:8081/repository/lms/"
                 }
             }
         }
+        
         stage('Clean Up') {
             steps {
                 cleanWs()
